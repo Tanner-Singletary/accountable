@@ -1,13 +1,40 @@
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { useState } from 'react';
+import { supabase } from '../../lib/supabase';
 
 export default function AddMetrics(props) {
     const defaultPositiveMetric = "New positive metric";
     const defaultNegativeMetric = "New negative metric";
+    const [loading, setLoading] = useState(false);
     const [positiveMetric, onChangePositiveMetric] = useState(defaultPositiveMetric);
     const [lastAddedPositiveMetric, setLastAddedPositiveMetric] = useState("");
     const [negativeMetric, onChangeNegativeMetric] = useState(defaultNegativeMetric);
     const [lastAddedNegativeMetric, setLastAddedNegativeMetric] = useState("");
+
+    async function upsertMetric(name, category) {
+        try {
+            console.log("async upsertMetric called with:");
+            console.log({"name": name, "category": category});
+            setLoading(true);
+            const updates = {
+              user: "some_user",
+              name: name,
+              category: category,
+            }
+      
+            const { error } = await supabase.from('metrics').upsert(updates);
+      
+            if (error) {
+              throw error;
+            }
+          } catch (error) {
+            if (error instanceof Error) {
+              Alert.alert(error.message);
+            }
+          } finally {
+            setLoading(false);
+          }
+    }
 
     function updatePositiveMetric (positiveMetric) {
         props.updateMetric(
@@ -16,6 +43,7 @@ export default function AddMetrics(props) {
             positiveMetric
         );
         setLastAddedPositiveMetric(positiveMetric);
+        upsertMetric(positiveMetric, "positive");
     }
 
     function updateNegativeMetric (negativeMetric) {
@@ -25,6 +53,7 @@ export default function AddMetrics(props) {
             negativeMetric
         );
         setLastAddedNegativeMetric(negativeMetric);
+        upsertMetric(positiveMetric, "negative");
     }
 
     return (
@@ -37,6 +66,7 @@ export default function AddMetrics(props) {
             <Button
                 title="Add positive metric"
                 onPress={() => updatePositiveMetric(positiveMetric)}
+                disabled={loading}
             ></Button>
             <Text>{lastAddedPositiveMetric ? `added ${lastAddedPositiveMetric}!`: ""}</Text>
             <Text>{"\n\n"}</Text>
@@ -48,6 +78,7 @@ export default function AddMetrics(props) {
             <Button
                 title="Add negative metric"
                 onPress={() => updateNegativeMetric(negativeMetric)}
+                disabled={loading}
             ></Button>
             <Text>{lastAddedNegativeMetric? `added ${lastAddedNegativeMetric}!`: ""}</Text>
             <Text>{"\n\n"}</Text>
