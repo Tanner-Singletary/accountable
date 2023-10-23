@@ -1,0 +1,9 @@
+{
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "lang": "en",
+  "name": "accountable-supa",
+  "short_name": "accountable-supa",
+  "start_url": "/?utm_source=web_app_manifest",
+  "orientation": "portrait"
+}
