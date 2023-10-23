@@ -12,8 +12,13 @@ export default function Main() {
 
     useEffect(() => {
         getMetrics()
-      }, []);
-    
+        /* activePage as dependency allows for refresh to display newly added metrics
+        when navigating back to the home page, with the drawback that it unnecessarily
+        does a GET call when changing to other pages (i.e. add metrics). Adding the
+        metrics arrays was attempted but resulted in infinite loop. 
+        */
+      }, [activePage]);
+
     function updateTodayScore (increment) {
         setTodayScore(todayScore + increment);
     }
