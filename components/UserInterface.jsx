@@ -18,6 +18,7 @@ export default function UserInterface(props) {
         case "add_metrics":
             pageDisplay = (
                 <AddMetrics
+                    session={props.session}
                 ></AddMetrics>
             );
             break;

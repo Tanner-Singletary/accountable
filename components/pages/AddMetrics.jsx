@@ -2,7 +2,7 @@ import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import { useState } from 'react';
 import { supabase } from '../../lib/supabase';
 
-export default function AddMetrics() {
+export default function AddMetrics({session}) {
     const defaultPositiveMetric = "New positive metric";
     const defaultNegativeMetric = "New negative metric";
     const [loading, setLoading] = useState(false);
@@ -17,7 +17,7 @@ export default function AddMetrics() {
             console.log({"name": name, "category": category});
             setLoading(true);
             const updates = {
-              user: "some_user",
+              user: session.user.id,
               name: name,
               category: category,
             }

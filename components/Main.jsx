@@ -3,15 +3,12 @@ import { Text } from 'react-native';
 import { supabase } from '../lib/supabase';
 import UserInterface from './UserInterface';
 
-export default function Main(props) {
+export default function Main({session}) {
     const [todayScore, setTodayScore] = useState(0);
     const [activePage, setActivePage] = useState("home");
     const [loading, setLoading] = useState(false);
     const [positiveMetricsArr, setPositiveMetricsArr] = useState([]);
     const [negativeMetricsArr, setNegativeMetricsArr] = useState([]);
-    // console.log(`typeof session from App.js: ${typeof props.session}`);
-    // console.log(`session from App.js: ${props.session}`);
-    console.log(`user id from session from App.js: ${props.session.user.id}`);
 
 
     useEffect(() => {
@@ -20,6 +17,8 @@ export default function Main(props) {
         when navigating back to the home page, with the drawback that it unnecessarily
         does a GET call when changing to other pages (i.e. add metrics). Adding the
         metrics arrays was attempted but resulted in infinite loop. 
+        TODO: Simplify / create state variable that is only changed upon
+        navigating back specifically to home page, such as a wrapper around setActivePage
         */
       }, [activePage]);
 
@@ -33,10 +32,7 @@ export default function Main(props) {
           const { data, error, status } = await supabase
             .from('metrics')
             .select(`name,category`)
-            // TODO: Replace 'some_user' with the user_id from the session,
-            // and also persist the user_id from the session in add_metric
-            .eq('user', 'some_user')
-            // .single()
+            .eq('user', session.user.id)
           if (error && status !== 406) {
             throw error
           }
@@ -76,6 +72,7 @@ export default function Main(props) {
             setActivePage={setActivePage}
             positiveMetricsArr={positiveMetricsArr}
             negativeMetricsArr={negativeMetricsArr}
+            session={session}
         ></UserInterface>
     )
 }
