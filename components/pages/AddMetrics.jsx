@@ -11,9 +11,9 @@ export default function AddMetrics(props) {
     const [negativeMetric, onChangeNegativeMetric] = useState(defaultNegativeMetric);
     const [lastAddedNegativeMetric, setLastAddedNegativeMetric] = useState("");
 
-    async function upsertMetric(name, category) {
+    async function insertMetric(name, category) {
         try {
-            console.log("async upsertMetric called with:");
+            console.log("async insertMetric called with:");
             console.log({"name": name, "category": category});
             setLoading(true);
             const updates = {
@@ -22,7 +22,7 @@ export default function AddMetrics(props) {
               category: category,
             }
       
-            const { error } = await supabase.from('metrics').upsert(updates);
+            const { error } = await supabase.from('metrics').insert(updates);
       
             if (error) {
               throw error;
@@ -43,7 +43,7 @@ export default function AddMetrics(props) {
             positiveMetric
         );
         setLastAddedPositiveMetric(positiveMetric);
-        upsertMetric(positiveMetric, "positive");
+        insertMetric(positiveMetric, "positive");
     }
 
     function updateNegativeMetric (negativeMetric) {
@@ -53,7 +53,7 @@ export default function AddMetrics(props) {
             negativeMetric
         );
         setLastAddedNegativeMetric(negativeMetric);
-        upsertMetric(positiveMetric, "negative");
+        insertMetric(positiveMetric, "negative");
     }
 
     return (
