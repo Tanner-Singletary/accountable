@@ -5,7 +5,6 @@ import 'react-native-url-polyfill/auto'
 import { useState, useEffect } from 'react'
 import { supabase } from './lib/supabase'
 import Auth from './components/Auth'
-import { Session } from '@supabase/supabase-js'
 
 import Main from './components/Main';
 import Header from './components/Header';

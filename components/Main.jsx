@@ -9,7 +9,9 @@ export default function Main(props) {
     const [loading, setLoading] = useState(false);
     const [positiveMetricsArr, setPositiveMetricsArr] = useState([]);
     const [negativeMetricsArr, setNegativeMetricsArr] = useState([]);
+    // console.log(`typeof session from App.js: ${typeof props.session}`);
     // console.log(`session from App.js: ${props.session}`);
+    console.log(`user id from session from App.js: ${props.session.user.id}`);
 
 
     useEffect(() => {
@@ -31,6 +33,8 @@ export default function Main(props) {
           const { data, error, status } = await supabase
             .from('metrics')
             .select(`name,category`)
+            // TODO: Replace 'some_user' with the user_id from the session,
+            // and also persist the user_id from the session in add_metric
             .eq('user', 'some_user')
             // .single()
           if (error && status !== 406) {
