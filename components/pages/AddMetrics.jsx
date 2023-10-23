@@ -2,7 +2,7 @@ import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import { useState } from 'react';
 import { supabase } from '../../lib/supabase';
 
-export default function AddMetrics(props) {
+export default function AddMetrics() {
     const defaultPositiveMetric = "New positive metric";
     const defaultNegativeMetric = "New negative metric";
     const [loading, setLoading] = useState(false);
@@ -37,23 +37,13 @@ export default function AddMetrics(props) {
     }
 
     function updatePositiveMetric (positiveMetric) {
-        props.updateMetric(
-            "add",
-            "positive",
-            positiveMetric
-        );
         setLastAddedPositiveMetric(positiveMetric);
         insertMetric(positiveMetric, "positive");
     }
 
     function updateNegativeMetric (negativeMetric) {
-        props.updateMetric(
-            "add",
-            "negative", 
-            negativeMetric
-        );
         setLastAddedNegativeMetric(negativeMetric);
-        insertMetric(positiveMetric, "negative");
+        insertMetric(negativeMetric, "negative");
     }
 
     return (

@@ -18,23 +18,6 @@ export default function Main() {
         setTodayScore(todayScore + increment);
     }
 
-    function updateMetric (addOrDelete, positiveOrNegative, metric) {
-        let replacementArr = positiveOrNegative === "positive" ? positiveMetricsArr : negativeMetricsArr;
-        if (addOrDelete === "add") {
-            replacementArr.push({"metric": metric});
-        } else if (addOrDelete === "delete") {
-            replacementArr = replacementArr.filter(
-                item => item.metric !== metric
-            );
-        }
-        if (positiveOrNegative === "positive") {
-            setPositiveMetricsArr(replacementArr);
-        }
-        else if (positiveOrNegative === "negative") {
-            setNegativeMetricsArr(replacementArr);
-        }
-    }
-
     async function getMetrics() {
         try {
           setLoading(true)
@@ -66,10 +49,10 @@ export default function Main() {
           }
         } catch (error) {
           if (error instanceof Error) {
-            Alert.alert(error.message)
+            Alert.alert(error.message);
           }
         } finally {
-          setLoading(false)
+          setLoading(false);
         }
       }
 
@@ -82,7 +65,6 @@ export default function Main() {
             setActivePage={setActivePage}
             positiveMetricsArr={positiveMetricsArr}
             negativeMetricsArr={negativeMetricsArr}
-            updateMetric={updateMetric}
         ></UserInterface>
     )
 }
