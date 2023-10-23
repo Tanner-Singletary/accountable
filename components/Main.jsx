@@ -3,12 +3,14 @@ import { Text } from 'react-native';
 import { supabase } from '../lib/supabase';
 import UserInterface from './UserInterface';
 
-export default function Main() {
+export default function Main(props) {
     const [todayScore, setTodayScore] = useState(0);
     const [activePage, setActivePage] = useState("home");
     const [loading, setLoading] = useState(false);
     const [positiveMetricsArr, setPositiveMetricsArr] = useState([]);
     const [negativeMetricsArr, setNegativeMetricsArr] = useState([]);
+    // console.log(`session from App.js: ${props.session}`);
+
 
     useEffect(() => {
         getMetrics()
