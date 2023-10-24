@@ -1,6 +1,8 @@
-import { View, Switch, Text, FlatList, Button, Alert } from 'react-native';
+import { View, Switch, Text, FlatList, Button } from 'react-native';
 import { useState } from 'react';
 import { supabase } from '../../lib/supabase';
+
+import alert from '../../lib/alertPolyfill';
 
 export default function DeleteMetrics(props) {
 
@@ -49,15 +51,15 @@ export default function DeleteMetrics(props) {
         />
         <Button
             title="Delete"
-            onPress={() => Alert.alert(
-                'Delete all selected?', 'Press DELETE to permanently delete metrics.', [
+            onPress={() => alert(
+                'Delete all selected?', 'Press OK to permanently delete metrics.', [
                 {
                   text: 'Cancel',
                   onPress: () => console.log('Cancel Pressed'),
                   style: 'cancel',
                 },
                 {
-                    text: 'DELETE', 
+                    text: 'OK', 
                     onPress: () => submitDeletion()
                 },
             ])}
