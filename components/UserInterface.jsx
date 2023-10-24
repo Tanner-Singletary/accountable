@@ -1,4 +1,4 @@
-import { View, Button } from 'react-native';
+import { Button } from 'react-native';
 import Home from './pages/Home';
 import AddMetrics from './pages/AddMetrics';
 import DeleteMetrics from './pages/DeleteMetrics';
@@ -36,7 +36,7 @@ export default function UserInterface(props) {
     }
     
     return (
-        <View style={{flex: 1, alignItems: 'center'}}>
+        <>
             {pageDisplay}
             <Button
                 title="Home"
@@ -50,6 +50,6 @@ export default function UserInterface(props) {
                 title="Delete Metrics"
                 onPress={() => props.setActivePage("delete_metrics")}
             ></Button>
-        </View>
+        </>
         );
 }

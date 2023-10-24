@@ -12,7 +12,12 @@ export default function MetricButton(props) {
         props.updateTodayScore(increment);
     }
     return (
-        <View style={{backgroundColor: pressed ? props.colorHex: props.initialColorHex}}>
+        <View style={{
+            alignItems: 'center',
+            margin: 10, 
+            minWidth: 150, 
+            backgroundColor: pressed ? props.colorHex: props.initialColorHex
+        }}>
             <Button
                 title={props.metric}
                 onPress={() => pressButton()}

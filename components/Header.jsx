@@ -1,10 +1,9 @@
 import { Text } from 'react-native';
-import { STYLES } from '../lib/styles/styles';
 
 export default function Header () {
     return (
         <>
-            <Text style={STYLES.header}>
+            <Text style={{fontSize: 20, fontWeight: 'bold'}}>
                 Accountable
                 {"\n"}
             </Text>
