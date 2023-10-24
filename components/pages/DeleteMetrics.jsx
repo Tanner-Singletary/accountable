@@ -32,14 +32,14 @@ export default function DeleteMetrics(props) {
     }
 
   return (
-    <View style={{flex: 1, padding: 20}}>
+    <View style={{flex: 1, padding: 20, justifyContent: 'center', alignItems: 'center'}}>
         <Text style={{fontSize: 18, fontWeight: "bold"}}>Delete Metrics</Text>
         <Text>{"\n"}</Text>
         <FlatList
             data={switchState}
             renderItem={
                 ({item}) => 
-            <View style={{flexDirection: 'row', padding: 10}}>
+            <View style={{flex: 1, flexDirection: 'row', padding: 10}}>
             <Switch
                 trackColor={{false: '#767577', true: '#81b0ff'}}
                 thumbColor={item.a ? '#f5dd4b' : '#f4f3f4'}
