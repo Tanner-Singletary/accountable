@@ -1,9 +1,9 @@
 import { View, Text, FlatList} from 'react-native';
-import { RED } from '../lib/constants/colors';
+import { theme } from '../lib/constants/theme';
 import MetricButton from './MetricButton';
 
 export default function MetricButtonPanel(props) {
-    const textHeader = props.colorHex === RED ? "Don't": "Do";
+    const textHeader = props.colorHex === theme.colors.veryBad ? "Don't": "Do";
     return (
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <Text style={{fontSize: 18, fontWeight: "bold"}}>{textHeader}</Text>

@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native';
 import MetricButtonPanel from '../MetricButtonPanel';
-import { LIGHT_GREEN, GREEN, LIGHT_RED, RED } from '../../lib/constants/colors';
+import { theme } from '../../lib/constants/theme';
 
 export default function Home(props) {
     return (
@@ -9,14 +9,14 @@ export default function Home(props) {
             {props.metrics.length > 0 ? 
                 <View style={{flex: 1, flexDirection: 'row', padding: 10, alignItems: 'center', justifyContent: 'center'}}>
                     <MetricButtonPanel 
-                        initialColorHex={LIGHT_GREEN}
-                        colorHex={GREEN}
+                        initialColorHex={theme.colors.good}
+                        colorHex={theme.colors.veryGood}
                         metrics={props.metrics.filter((item) => item.category==="positive")}
                         updateTodayScore={props.updateTodayScore}
                     ></MetricButtonPanel>
                     <MetricButtonPanel 
-                        initialColorHex={LIGHT_RED}
-                        colorHex={RED}
+                        initialColorHex={theme.colors.bad}
+                        colorHex={theme.colors.veryBad}
                         metrics={props.metrics.filter((item) => item.category==="negative")}
                         updateTodayScore={props.updateTodayScore}
                     ></MetricButtonPanel>

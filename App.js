@@ -8,7 +8,7 @@ import Auth from './components/Auth'
 
 import Main from './components/Main';
 import Header from './components/Header';
-import { BACKGROUND_LIGHT } from './lib/constants/colors';
+import { theme } from './lib/constants/theme';
 
 export default function App() {
   const [session, setSession] = useState(null);
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     */
     padding: 30,
     flex: 1,
-    backgroundColor: BACKGROUND_LIGHT,
+    backgroundColor: theme.colors.background,
     alignItems: 'center',
     justifyContent: 'center',
   },

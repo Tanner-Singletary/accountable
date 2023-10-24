@@ -1,6 +1,6 @@
 import { Text, View, Button } from 'react-native';
 import { useState } from 'react';
-import { RED } from '../lib/constants/colors';
+import { theme } from '../lib/constants/theme';
 
 export default function MetricButton(props) {
     const [pressed, setPressed] = useState(false);
@@ -8,7 +8,7 @@ export default function MetricButton(props) {
     function pressButton () {
         setPressed(true);
         setTimesPressed(timesPressed + 1);
-        const increment = props.colorHex === RED ? -1: 1;
+        const increment = props.colorHex === theme.colors.veryBad ? -1: 1;
         props.updateTodayScore(increment);
     }
     return (
