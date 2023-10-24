@@ -4,11 +4,10 @@ import { LIGHT_GREEN, GREEN, LIGHT_RED, RED } from '../../lib/constants/colors';
 
 export default function Home(props) {
     return (
-        <View style={{marginTop: 10, alignItems: 'center'}}>
+        <View style={{flex: 1, marginTop: 10, alignItems: 'center', justifyContent: 'center'}}>
             <Text>Today's Score: {props.todayScore}</Text>
-            <Text>{"\n"}</Text>
             {props.metrics.length > 0 ? 
-                <View style={{flex: 1, flexDirection: 'row', padding: 50}}>
+                <View style={{flex: 1, flexDirection: 'row', padding: 10, alignItems: 'center', justifyContent: 'center'}}>
                     <MetricButtonPanel 
                         initialColorHex={LIGHT_GREEN}
                         colorHex={GREEN}

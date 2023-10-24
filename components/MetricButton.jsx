@@ -13,10 +13,13 @@ export default function MetricButton(props) {
     }
     return (
         <View style={{
+            flex: 1,
             alignItems: 'center',
+            justifyContent: 'center',
             margin: 10, 
-            minWidth: 150, 
-            backgroundColor: pressed ? props.colorHex: props.initialColorHex
+            backgroundColor: pressed ? props.colorHex: props.initialColorHex,
+            borderColor: 'black',
+            borderWidth: 1
         }}>
             <Button
                 title={props.metric}
