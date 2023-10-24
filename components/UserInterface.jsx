@@ -1,6 +1,7 @@
 import { View, Button } from 'react-native';
 import Home from './pages/Home';
 import AddMetrics from './pages/AddMetrics';
+import DeleteMetrics from './pages/DeleteMetrics';
 
 export default function UserInterface(props) {
     let pageDisplay = <></>;
@@ -22,6 +23,13 @@ export default function UserInterface(props) {
                 ></AddMetrics>
             );
             break;
+        case "delete_metrics":
+            pageDisplay = (
+                <DeleteMetrics
+                    session={props.session}
+                ></DeleteMetrics>
+            );
+            break;
     }
     
     return (
@@ -34,6 +42,10 @@ export default function UserInterface(props) {
             <Button
                 title="Add Metrics"
                 onPress={() => props.setActivePage("add_metrics")}
+            ></Button>
+            <Button
+                title="Delete Metrics"
+                onPress={() => props.setActivePage("delete_metrics")}
             ></Button>
         </View>
         );
