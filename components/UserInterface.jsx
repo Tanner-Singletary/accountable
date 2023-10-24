@@ -5,14 +5,15 @@ import DeleteMetrics from './pages/DeleteMetrics';
 
 export default function UserInterface(props) {
     let pageDisplay = <></>;
+    let metricsWithDeleteToggle = props.metrics;
+    metricsWithDeleteToggle.forEach((item)=>item["staged_to_delete"] = false);
     switch (props.activePage) {
         case "home":
             pageDisplay = (
                 <Home
                     todayScore={props.todayScore} 
                     updateTodayScore={props.updateTodayScore}
-                    positiveMetricsArr={props.positiveMetricsArr}
-                    negativeMetricsArr={props.negativeMetricsArr}
+                    metrics={props.metrics}
                 ></Home>
             );
             break;
@@ -27,6 +28,7 @@ export default function UserInterface(props) {
             pageDisplay = (
                 <DeleteMetrics
                     session={props.session}
+                    metrics={metricsWithDeleteToggle}
                 ></DeleteMetrics>
             );
             break;

@@ -2,28 +2,20 @@ import { View, Switch, Text, FlatList } from 'react-native';
 import { useState } from 'react';
 // import { supabase } from '../../lib/supabase';
 
-export default function DeleteMetrics({session}) {
+export default function DeleteMetrics(props) {
 
 // const { error } = await supabase
 //   .from('countries')
 //   .delete()
 //   .eq('id', 1)
-
-
-const [switchState, setSwitchState] = useState([
-    {"metric": "met1", "staged_to_delete": false},
-    {"metric": "metr2", "staged_to_delete": false}
-]);
+const [switchState, setSwitchState] = useState(props.metrics);
 const toggleSwitch = (item) => {
-    console.log("toggleSwitch triggered");
     let prevState = [ ...switchState];
     for (let obj of prevState) {
-        if (obj.metric === item.metric) {
-            console.log(`Changing ${obj.metric} from ${obj.staged_to_delete}to ${!obj.staged_to_delete}`);
+        if (obj.name === item.name) {
             obj.staged_to_delete = !obj.staged_to_delete;
         }
     }
-    console.log(prevState);
     setSwitchState(prevState);
 }
 
@@ -42,7 +34,7 @@ const toggleSwitch = (item) => {
                     onValueChange={() => toggleSwitch(item)}
                     value={item.staged_to_delete}
                   />
-                  <Text>{item.metric}</Text>
+                  <Text>{item.name}</Text>
                 </View>
             }
             />

@@ -7,8 +7,7 @@ export default function Main({session}) {
     const [todayScore, setTodayScore] = useState(0);
     const [activePage, setActivePage] = useState("home");
     const [loading, setLoading] = useState(false);
-    const [positiveMetricsArr, setPositiveMetricsArr] = useState([]);
-    const [negativeMetricsArr, setNegativeMetricsArr] = useState([]);
+    const [metrics, setMetrics] = useState([]);
 
 
     useEffect(() => {
@@ -38,21 +37,7 @@ export default function Main({session}) {
           }
     
           if (data) {
-            let startingPositiveArr = [];
-            let startingNegativeArr = [];
-            console.log("data returned:");
-            for (let row of data) {
-                if (row.category === "positive") {
-                    startingPositiveArr.push({"metric": row.name});
-                } else if (row.category === "negative") {
-                    startingNegativeArr.push({"metric": row.name});
-                } else {
-                    console.log(`row.category was not positive or negative, it was: ${row.category}`);
-                }
-                console.log(row);
-            }
-            setPositiveMetricsArr(startingPositiveArr);
-            setNegativeMetricsArr(startingNegativeArr);
+            setMetrics(data);
           }
         } catch (error) {
           if (error instanceof Error) {
@@ -70,8 +55,7 @@ export default function Main({session}) {
             updateTodayScore={updateTodayScore}
             activePage={activePage}
             setActivePage={setActivePage}
-            positiveMetricsArr={positiveMetricsArr}
-            negativeMetricsArr={negativeMetricsArr}
+            metrics={metrics}
             session={session}
         ></UserInterface>
     )

@@ -3,7 +3,6 @@ import MetricButtonPanel from '../MetricButtonPanel';
 import { LIGHT_GREEN, GREEN, LIGHT_RED, RED } from '../../lib/constants/colors';
 
 export default function Home(props) {
-    const metricCount = props.positiveMetricsArr.length + props.negativeMetricsArr.length;
     // TODO: Uncomment block for opt in premium users only
     /*
     let expectedDonation = 0.00;
@@ -25,18 +24,18 @@ export default function Home(props) {
             <Text>{"\n"}</Text> */}
             <Text>Today's Score: {props.todayScore}</Text>
             <Text>{"\n"}</Text>
-            {metricCount > 0 ? 
+            {props.metrics.length > 0 ? 
                 <View style={{flexDirection: 'row'}}>
                     <MetricButtonPanel 
                         initialColorHex={LIGHT_GREEN}
                         colorHex={GREEN}
-                        metricsArr={props.positiveMetricsArr}
+                        metrics={props.metrics.filter((item) => item.category==="positive")}
                         updateTodayScore={props.updateTodayScore}
                     ></MetricButtonPanel>
                     <MetricButtonPanel 
                         initialColorHex={LIGHT_RED}
                         colorHex={RED}
-                        metricsArr={props.negativeMetricsArr}
+                        metrics={props.metrics.filter((item) => item.category==="negative")}
                         updateTodayScore={props.updateTodayScore}
                     ></MetricButtonPanel>
                 </View>

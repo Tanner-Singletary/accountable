@@ -9,10 +9,10 @@ export default function MetricButtonPanel(props) {
             <Text style={{fontSize: 18, fontWeight: "bold"}}>{textHeader}</Text>
             <FlatList
                 style={{backgroundColor: props.initialColorHex}}
-                data={props.metricsArr}
+                data={props.metrics}
                 renderItem={
                     ({item}) => <MetricButton 
-                        metric={item.metric}
+                        metric={item.name}
                         initialColorHex={props.initialColorHex}
                         colorHex={props.colorHex}
                         updateTodayScore={props.updateTodayScore}
