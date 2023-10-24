@@ -32,13 +32,14 @@ export default function DeleteMetrics(props) {
     }
 
   return (
-    <View>
+    <View style={{flex: 1, padding: 20}}>
         <Text style={{fontSize: 18, fontWeight: "bold"}}>Delete Metrics</Text>
+        <Text>{"\n"}</Text>
         <FlatList
             data={switchState}
             renderItem={
                 ({item}) => 
-            <View style={{flexDirection: 'row'}}>
+            <View style={{flexDirection: 'row', padding: 10}}>
             <Switch
                 trackColor={{false: '#767577', true: '#81b0ff'}}
                 thumbColor={item.a ? '#f5dd4b' : '#f4f3f4'}
@@ -46,7 +47,7 @@ export default function DeleteMetrics(props) {
                 onValueChange={() => toggleSwitch(item)}
                 value={item.staged_to_delete}
                 />
-                <Text>{item.name}</Text>
+                <Text style={{padding: 10}}>{item.name}</Text>
             </View>
         }
         />

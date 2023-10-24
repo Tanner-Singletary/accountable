@@ -36,7 +36,7 @@ export default function UserInterface(props) {
     }
     
     return (
-        <View style={{flex: 5, alignItems: 'center'}}>
+        <View style={{flex: 1, alignItems: 'center'}}>
             {pageDisplay}
             <Button
                 title="Home"
