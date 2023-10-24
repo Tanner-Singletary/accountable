@@ -26,7 +26,7 @@ export default function DeleteMetrics(props) {
             .delete()
             .eq('user', props.session.user.id)
             .in('name', metricNamesToDelete)
-        Alert.alert("Deletion submitted, returning to home page.");
+        alert("Deletion submitted, returning to home page.");
         props.setActivePage("home");
     }
 
