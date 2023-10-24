@@ -1,25 +1,32 @@
 import { View, Switch, Text, FlatList, Button, Alert } from 'react-native';
 import { useState } from 'react';
-// import { supabase } from '../../lib/supabase';
+import { supabase } from '../../lib/supabase';
 
 export default function DeleteMetrics(props) {
 
-// const { error } = await supabase
-//   .from('countries')
-//   .delete()
-//   .eq('id', 1)
-const [switchState, setSwitchState] = useState(props.metrics);
-const [buttonDisabled, setButtonDisabled] = useState(true);
-const toggleSwitch = (item) => {
-    let prevState = [ ...switchState];
-    for (let obj of prevState) {
-        if (obj.name === item.name) {
-            obj.staged_to_delete = !obj.staged_to_delete;
+    
+    const [switchState, setSwitchState] = useState(props.metrics);
+    const [buttonDisabled, setButtonDisabled] = useState(true);
+    const toggleSwitch = (item) => {
+        let prevState = [ ...switchState];
+        for (let obj of prevState) {
+            if (obj.name === item.name) {
+                obj.staged_to_delete = !obj.staged_to_delete;
+            }
         }
+        setButtonDisabled(prevState.filter((item)=>item.staged_to_delete === true).length <= 0);
+        setSwitchState(prevState);
     }
-    setButtonDisabled(prevState.filter((item)=>item.staged_to_delete === true).length <= 0);
-    setSwitchState(prevState);
-}
+    async function submitDeletion() {
+        const metricNamesToDelete = switchState.filter((item)=>item.staged_to_delete === true).map((item)=>item.name);
+        const { error } = await supabase
+            .from('metrics')
+            .delete()
+            .eq('user', props.session.user.id)
+            .in('name', metricNamesToDelete)
+        Alert.alert("Deletion submitted, returning to home page.");
+        props.setActivePage("home");
+    }
 
   return (
     <View>
@@ -51,7 +58,7 @@ const toggleSwitch = (item) => {
                 },
                 {
                     text: 'DELETE', 
-                    onPress: () => console.log('OK Pressed')
+                    onPress: () => submitDeletion()
                 },
             ])}
             disabled={buttonDisabled}
