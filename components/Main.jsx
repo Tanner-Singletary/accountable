@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Text } from 'react-native';
 import { supabase } from '../lib/supabase';
 import UserInterface from './UserInterface';
+import alert from '../lib/alertPolyfill';
 
 export default function Main({session}) {
     const [todayScore, setTodayScore] = useState(0);
@@ -30,7 +31,7 @@ export default function Main({session}) {
           setLoading(true)
           const { data, error, status } = await supabase
             .from('metrics')
-            .select(`name,category`)
+            .select(`id,name,category`)
             .eq('user', session.user.id)
           if (error && status !== 406) {
             throw error
@@ -41,7 +42,7 @@ export default function Main({session}) {
           }
         } catch (error) {
           if (error instanceof Error) {
-            Alert.alert(error.message);
+            alert(error.message);
           }
         } finally {
           setLoading(false);

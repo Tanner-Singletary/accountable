@@ -13,12 +13,14 @@ export default function Home(props) {
                         colorHex={theme.colors.veryGood}
                         metrics={props.metrics.filter((item) => item.category==="positive")}
                         updateTodayScore={props.updateTodayScore}
+                        session={props.session}
                     ></MetricButtonPanel>
                     <MetricButtonPanel 
                         initialColorHex={theme.colors.bad}
                         colorHex={theme.colors.veryBad}
                         metrics={props.metrics.filter((item) => item.category==="negative")}
                         updateTodayScore={props.updateTodayScore}
+                        session={props.session}
                     ></MetricButtonPanel>
                 </View>
             : <Text style={{fontSize: 20}}>Click 'Add Metrics' below to get started! </Text>

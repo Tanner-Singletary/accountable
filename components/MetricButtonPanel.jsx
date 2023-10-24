@@ -11,11 +11,12 @@ export default function MetricButtonPanel(props) {
                 style={{backgroundColor: props.initialColorHex}}
                 data={props.metrics}
                 renderItem={
-                    ({item}) => <MetricButton 
-                        metric={item.name}
+                    ({item}) => <MetricButton
+                        metric={item}
                         initialColorHex={props.initialColorHex}
                         colorHex={props.colorHex}
                         updateTodayScore={props.updateTodayScore}
+                        session={props.session}
                     ></MetricButton>
             }
             />

@@ -5,8 +5,6 @@ import { supabase } from '../../lib/supabase';
 import alert from '../../lib/alertPolyfill';
 
 export default function DeleteMetrics(props) {
-
-    
     const [switchState, setSwitchState] = useState(props.metrics);
     const [buttonDisabled, setButtonDisabled] = useState(true);
     const toggleSwitch = (item) => {

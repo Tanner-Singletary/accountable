@@ -14,6 +14,7 @@ export default function UserInterface(props) {
                     todayScore={props.todayScore} 
                     updateTodayScore={props.updateTodayScore}
                     metrics={props.metrics}
+                    session={props.session}
                 ></Home>
             );
             break;
