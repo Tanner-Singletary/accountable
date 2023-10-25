@@ -33,7 +33,7 @@ export default function UserInterface(props) {
             pageDisplay = (
                 <DeleteMetrics
                     session={props.session}
-                    metrics={metricsWithDeleteToggle}
+                    metrics={props.metrics}
                     setActivePage={props.setActivePage}
                 ></DeleteMetrics>
             );
