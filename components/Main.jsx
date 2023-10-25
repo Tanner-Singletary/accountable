@@ -5,12 +5,14 @@ import UserInterface from './UserInterface';
 import alert from '../lib/alertPolyfill';
 
 export default function Main({session}) {
+    const [lifetimeScore, setLifetimeScore] = useState(0);
     const [todayScore, setTodayScore] = useState(0);
     const [activePage, setActivePage] = useState("home");
     const [loadingMetrics, setLoadingMetrics] = useState(false);
     const [loadingMetricLogs, setLoadingMetricLogs] = useState(false);
     const [metrics, setMetrics] = useState([]);
     const [metricLogs, setMetricLogs] = useState([]);
+    const [todayLogs, setTodayLogs] = useState([]);
 
     useEffect(() => {
         getMetrics();
@@ -28,10 +30,11 @@ export default function Main({session}) {
         */
       }, [activePage]);
 
-    function updateTodayScore (increment) {
+    function updateScore (increment) {
         setTodayScore(todayScore + increment);
+        setLifetimeScore(lifetimeScore + increment);
     }
-
+    
     async function getMetrics() {
         try {
           setLoadingMetrics(true)
@@ -71,10 +74,12 @@ export default function Main({session}) {
           }
           if (data) {
             setMetricLogs(data);
-            let todaysLogs = data.filter(
+            setLifetimeScore(data.length);
+            let statelessTodayLogs = data.filter(
               (item) => new Date(item.created_at) >= startOfDay && new Date(item.created_at) <= endOfDay
             );
-            setTodayScore(todaysLogs.length);
+            setTodayLogs(statelessTodayLogs);
+            setTodayScore(todayLogs.length);
           }
         } catch (error) {
           if (error instanceof Error) {
@@ -88,13 +93,14 @@ export default function Main({session}) {
     return (
         loadingMetrics || loadingMetricLogs ? <Text>Loading...</Text> :
         <UserInterface
+            lifetimeScore={lifetimeScore}
             todayScore={todayScore}
-            updateTodayScore={updateTodayScore}
+            updateScore={updateScore}
             activePage={activePage}
             setActivePage={setActivePage}
             metrics={metrics}
             metricLogs={metricLogs}
-            todaysLogs={todaysLogs}
+            todayLogs={todayLogs}
             session={session}
         ></UserInterface>
     )

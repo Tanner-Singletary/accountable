@@ -6,18 +6,18 @@ import alert from '../lib/alertPolyfill';
 
 export default function MetricButton(props) {
     const [loading, setLoading] = useState(false);
-    const [pressed, setPressed] = useState(false);
-    const [timesPressed, setTimesPressed] = useState(0);
+    const [pressed, setPressed] = useState(Boolean(props.metric.todayCount));
+    const [timesPressed, setTimesPressed] = useState(props.metric.todayCount);
+    const [lifetimeTimesPressed, setLifetimeTimesPressed] = useState(props.metric.lifetimeCount);
     
     async function logMetricClick() {
-        console.log("async logMetricClick called for metric:");
         setPressed(true);
         setTimesPressed(timesPressed + 1);
+        setLifetimeTimesPressed(lifetimeTimesPressed + 1);
         const increment = props.colorHex === theme.colors.veryBad ? -1: 1;
-        props.updateTodayScore(increment);
+        props.updateScore(increment);
 
         try {
-            console.log(props.metric);
             setLoading(true);
             const data = {
               user_id: props.session.user.id,
@@ -53,7 +53,8 @@ export default function MetricButton(props) {
                 onPress={() => logMetricClick()}
                 disabled={loading}
             ></Button>
-            <Text>{timesPressed}</Text>
+            <Text>Lifetime: {lifetimeTimesPressed}</Text>
+            <Text>Today: {timesPressed}</Text>
         </View>
         );
 }
