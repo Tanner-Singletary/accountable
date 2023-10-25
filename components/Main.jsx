@@ -22,6 +22,9 @@ export default function Main({session}) {
         metrics arrays was attempted but resulted in infinite loop. 
         TODO: Simplify / create state variable that is only changed upon
         navigating back specifically to home page, such as a wrapper around setActivePage
+        unless there is confirmed reasons to need to re-render upon another page change
+        in which case specifying which pages and only altering the state variable
+        when one of those pages is changed (as opposed to any page change).
         */
       }, [activePage]);
 
@@ -39,7 +42,6 @@ export default function Main({session}) {
           if (error && status !== 406) {
             throw error;
           }
-    
           if (data) {
             setMetrics(data);
           }
@@ -53,6 +55,11 @@ export default function Main({session}) {
       }
 
       async function getMetricLogs() {
+        let startOfDay = new Date();
+        startOfDay.setHours(0,0,0,0);
+        let endOfDay = new Date();
+        endOfDay.setHours(23,59,59,999);
+
         try {
           setLoadingMetricLogs(true)
           const { data, error, status } = await supabase
@@ -62,9 +69,12 @@ export default function Main({session}) {
           if (error && status !== 406) {
             throw error;
           }
-    
           if (data) {
             setMetricLogs(data);
+            let todaysLogs = data.filter(
+              (item) => new Date(item.created_at) >= startOfDay && new Date(item.created_at) <= endOfDay
+            );
+            setTodayScore(todaysLogs.length);
           }
         } catch (error) {
           if (error instanceof Error) {
@@ -83,6 +93,8 @@ export default function Main({session}) {
             activePage={activePage}
             setActivePage={setActivePage}
             metrics={metrics}
+            metricLogs={metricLogs}
+            todaysLogs={todaysLogs}
             session={session}
         ></UserInterface>
     )
