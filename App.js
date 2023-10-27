@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
-
+import { NavigationContainer } from '@react-navigation/native';
 import 'react-native-url-polyfill/auto'
 import { useState, useEffect } from 'react'
 import { supabase } from './lib/supabase'
@@ -24,11 +24,13 @@ export default function App() {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <Header></Header>
-      {session && session.user ? <Main key={session.user.id} session={session} /> : <Auth />}
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <View style={styles.container}>
+        <Header></Header>
+        {session && session.user ? <Main key={session.user.id} session={session} /> : <Auth />}
+        <StatusBar style="auto" />
+      </View>
+    </NavigationContainer>
   );
 }
 
