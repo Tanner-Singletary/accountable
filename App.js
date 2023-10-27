@@ -1,8 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+
 import 'react-native-url-polyfill/auto'
 import { useState, useEffect } from 'react'
+import { NavigationContainer } from '@react-navigation/native';
 import { supabase } from './lib/supabase'
 import Auth from './components/Auth'
 
@@ -24,13 +25,13 @@ export default function App() {
   }, []);
 
   return (
-    <NavigationContainer>
-      <View style={styles.container}>
+    <View style={styles.container}>
+      <NavigationContainer>
         <Header></Header>
         {session && session.user ? <Main key={session.user.id} session={session} /> : <Auth />}
         <StatusBar style="auto" />
-      </View>
-    </NavigationContainer>
+        </NavigationContainer>
+    </View>
   );
 }
 
