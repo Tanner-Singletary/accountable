@@ -44,7 +44,6 @@ export default function UserInterface(props) {
                 initialRouteName="HomePage"
                 screenOptions={{
                     tabBarActiveTintColor: '#e91e63'
-
                 }}
                 >
                 <Tab.Screen
@@ -65,7 +64,6 @@ export default function UserInterface(props) {
                     tabBarIcon: ({ color, size }) => (
                         <MaterialCommunityIcons name="plus" color={color} size={size} />
                     ),
-                    tabBarBadge: 3,
                     }}
                 />
                 <Tab.Screen
