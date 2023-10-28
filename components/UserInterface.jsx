@@ -39,7 +39,7 @@ export default function UserInterface(props) {
     }
     
     return (
-        <View style={{flex: 1, minWidth: 300}}>
+        <View style={{flex: 1, minWidth: 400, justifyContent: 'center'}}>
             <Tab.Navigator
                 initialRouteName="HomePage"
                 screenOptions={{
