@@ -1,3 +1,4 @@
+import { View } from 'react-native';
 import Home from './pages/Home';
 import AddMetrics from './pages/AddMetrics';
 import DeleteMetrics from './pages/DeleteMetrics';
@@ -38,44 +39,46 @@ export default function UserInterface(props) {
     }
     
     return (
-    <Tab.Navigator
-        initialRouteName="HomePage"
-        screenOptions={{
-            tabBarActiveTintColor: '#e91e63'
+        <View style={{flex: 1, minWidth: 300}}>
+            <Tab.Navigator
+                initialRouteName="HomePage"
+                screenOptions={{
+                    tabBarActiveTintColor: '#e91e63'
 
-        }}
-        >
-        <Tab.Screen
-            name="Home"
-            component={HomePage}
-            options={{
-            tabBarLabel: 'Home',
-            tabBarIcon: ({ color, size }) => (
-                <MaterialCommunityIcons name="home" color={color} size={size} />
-            ),
-            }}
-        />
-        <Tab.Screen
-            name="Add"
-            component={AddMetricsPage}
-            options={{
-            tabBarLabel: 'Add',
-            tabBarIcon: ({ color, size }) => (
-                <MaterialCommunityIcons name="plus" color={color} size={size} />
-            ),
-            tabBarBadge: 3,
-            }}
-        />
-        <Tab.Screen
-            name="Delete"
-            component={DeleteMetricsPage}
-            options={{
-            tabBarLabel: 'Delete',
-            tabBarIcon: ({ color, size }) => (
-                <MaterialCommunityIcons name="trash-can-outline" color={color} size={size} />
-            ),
-            }}
-        />
-        </Tab.Navigator>
+                }}
+                >
+                <Tab.Screen
+                    name="Home"
+                    component={HomePage}
+                    options={{
+                    tabBarLabel: 'Home',
+                    tabBarIcon: ({ color, size }) => (
+                        <MaterialCommunityIcons name="home" color={color} size={size} />
+                    ),
+                    }}
+                />
+                <Tab.Screen
+                    name="Add"
+                    component={AddMetricsPage}
+                    options={{
+                    tabBarLabel: 'Add',
+                    tabBarIcon: ({ color, size }) => (
+                        <MaterialCommunityIcons name="plus" color={color} size={size} />
+                    ),
+                    tabBarBadge: 3,
+                    }}
+                />
+                <Tab.Screen
+                    name="Delete"
+                    component={DeleteMetricsPage}
+                    options={{
+                    tabBarLabel: 'Delete',
+                    tabBarIcon: ({ color, size }) => (
+                        <MaterialCommunityIcons name="trash-can-outline" color={color} size={size} />
+                    ),
+                    }}
+                />
+            </Tab.Navigator>
+        </View>
     )
 }
