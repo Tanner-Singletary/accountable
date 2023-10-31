@@ -15,7 +15,6 @@ export default function MetricButtonPanel(props) {
                         metric={item}
                         initialColorHex={props.initialColorHex}
                         colorHex={props.colorHex}
-                        updateScore={props.updateScore}
                         session={props.session}
                     ></MetricButton>
             }

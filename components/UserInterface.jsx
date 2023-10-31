@@ -1,5 +1,6 @@
 import { View } from 'react-native';
 import Home from './pages/Home';
+import Profile from './pages/Profile';
 import AddMetrics from './pages/AddMetrics';
 import DeleteMetrics from './pages/DeleteMetrics';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -16,15 +17,19 @@ export default function UserInterface(props) {
 
     function HomePage () {
         return <Home
-            lifetimeScore={props.lifetimeScore} 
-            todayScore={props.todayScore} 
-            updateScore={props.updateScore}
             metrics={props.metrics}
             session={props.session}
             triggerMetricCallToggle={props.triggerMetricCallToggle}
         ></Home>
     }
 
+    function ProfilePage () {
+        return <Profile
+            lifetimeScore={props.lifetimeScore} 
+            todayScore={props.todayScore} 
+        ></Profile>
+    }
+    
     function AddMetricsPage () {
         return <AddMetrics
             session={props.session}
@@ -55,6 +60,16 @@ export default function UserInterface(props) {
                     tabBarLabel: 'Home',
                     tabBarIcon: ({ color, size }) => (
                         <MaterialCommunityIcons name="home" color={color} size={size} />
+                    ),
+                    }}
+                />
+                <Tab.Screen
+                    name="Profile"
+                    component={ProfilePage}
+                    options={{
+                    tabBarLabel: 'Profile',
+                    tabBarIcon: ({ color, size }) => (
+                        <MaterialCommunityIcons name="head-flash-outline" color={color} size={size} />
                     ),
                     }}
                 />

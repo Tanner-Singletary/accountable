@@ -1,7 +1,6 @@
 import { Text, View, Button } from 'react-native';
 import { useState } from 'react';
 import { supabase } from '../lib/supabase';
-import { theme } from '../lib/constants/theme';
 import alert from '../lib/alertPolyfill';
 
 export default function MetricButton(props) {
@@ -14,7 +13,6 @@ export default function MetricButton(props) {
         setPressed(true);
         setTimesPressed(timesPressed + 1);
         setLifetimeTimesPressed(lifetimeTimesPressed + 1);
-        const increment = props.colorHex === theme.colors.veryBad ? -1: 1;
 
         try {
             setLoading(true);
@@ -34,7 +32,6 @@ export default function MetricButton(props) {
             }
           } finally {
             setLoading(false);
-            props.updateScore(increment);
           }
     }
 

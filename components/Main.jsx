@@ -5,8 +5,8 @@ import UserInterface from './UserInterface';
 import alert from '../lib/alertPolyfill';
 
 export default function Main({session}) {
-    const [lifetimeScore, setLifetimeScore] = useState(0);
     const [todayScore, setTodayScore] = useState(0);
+    const [lifetimeScore, setLifetimeScore] = useState(0);
     const [refreshContext, setRefreshContext] = useState(false);
     const [loadingMetrics, setLoadingMetrics] = useState(true);
     const [loadingMetricLogs, setLoadingMetricLogs] = useState(true);
@@ -19,27 +19,11 @@ export default function Main({session}) {
     }
     
     useEffect(() => {
-        // console.log("useEffect triggered");
         getMetrics();
         getMetricLogs();
 
         // Dependency for doing get call to db after metrics are added or removed
       }, [refreshContext]);
-
-    function updateScore (increment) {
-        setTodayScore(todayScore + increment);
-        setLifetimeScore(lifetimeScore + increment);
-        /* TODO/Bugfix: Full re-render is clear with flash
-        after each click, consider improving lifetime/today state tracking
-        so not necessary to re-call db after every metric log
-        Consider pushing score state down to user interface
-        so that Main is not required to re-render unless add/delete
-        metrics, so it's just a one time calculation.
-        Or better separate lifetime and today score totals into
-        a separate tab and just keep the home page focused on the metrics
-        */
-        triggerMetricCallToggle();
-    }
     
     async function getMetrics() {
         try {
@@ -85,7 +69,7 @@ export default function Main({session}) {
               (item) => new Date(item.created_at) >= startOfDay && new Date(item.created_at) <= endOfDay
             );
             setTodayLogs(statelessTodayLogs);
-            setTodayScore(todayLogs.length);
+            setTodayScore(statelessTodayLogs.length);
           }
         } catch (error) {
           if (error instanceof Error) {
@@ -101,7 +85,6 @@ export default function Main({session}) {
         <UserInterface
             lifetimeScore={lifetimeScore}
             todayScore={todayScore}
-            updateScore={updateScore}
             triggerMetricCallToggle={triggerMetricCallToggle}
             metrics={metrics}
             metricLogs={metricLogs}
