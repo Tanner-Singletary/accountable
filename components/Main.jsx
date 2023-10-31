@@ -8,8 +8,8 @@ export default function Main({session}) {
     const [lifetimeScore, setLifetimeScore] = useState(0);
     const [todayScore, setTodayScore] = useState(0);
     const [refreshContext, setRefreshContext] = useState(false);
-    const [loadingMetrics, setLoadingMetrics] = useState(false);
-    const [loadingMetricLogs, setLoadingMetricLogs] = useState(false);
+    const [loadingMetrics, setLoadingMetrics] = useState(true);
+    const [loadingMetricLogs, setLoadingMetricLogs] = useState(true);
     const [metrics, setMetrics] = useState([]);
     const [metricLogs, setMetricLogs] = useState([]);
     const [todayLogs, setTodayLogs] = useState([]);
@@ -19,6 +19,7 @@ export default function Main({session}) {
     }
     
     useEffect(() => {
+        // console.log("useEffect triggered");
         getMetrics();
         getMetricLogs();
 
@@ -28,9 +29,15 @@ export default function Main({session}) {
     function updateScore (increment) {
         setTodayScore(todayScore + increment);
         setLifetimeScore(lifetimeScore + increment);
-        // TODO/Bugfix: Full re-render is clear with flash
-        // after each click, consider improving lifetime/today state tracking
-        // so not necessary to re-call db after every metric log
+        /* TODO/Bugfix: Full re-render is clear with flash
+        after each click, consider improving lifetime/today state tracking
+        so not necessary to re-call db after every metric log
+        Consider pushing score state down to user interface
+        so that Main is not required to re-render unless add/delete
+        metrics, so it's just a one time calculation.
+        Or better separate lifetime and today score totals into
+        a separate tab and just keep the home page focused on the metrics
+        */
         triggerMetricCallToggle();
     }
     
