@@ -15,7 +15,6 @@ export default function MetricButton(props) {
         setTimesPressed(timesPressed + 1);
         setLifetimeTimesPressed(lifetimeTimesPressed + 1);
         const increment = props.colorHex === theme.colors.veryBad ? -1: 1;
-        props.updateScore(increment);
 
         try {
             setLoading(true);
@@ -35,6 +34,7 @@ export default function MetricButton(props) {
             }
           } finally {
             setLoading(false);
+            props.updateScore(increment);
           }
     }
 

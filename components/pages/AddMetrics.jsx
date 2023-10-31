@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { supabase } from '../../lib/supabase';
 import alert from '../../lib/alertPolyfill';
 
-export default function AddMetrics({session}) {
+export default function AddMetrics({session, triggerMetricCallToggle}) {
     const defaultPositiveMetric = "New positive metric";
     const defaultNegativeMetric = "New negative metric";
     const [loading, setLoading] = useState(false);
@@ -34,6 +34,7 @@ export default function AddMetrics({session}) {
             }
           } finally {
             setLoading(false);
+            triggerMetricCallToggle();
           }
     }
 

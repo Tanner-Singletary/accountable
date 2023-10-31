@@ -21,12 +21,14 @@ export default function UserInterface(props) {
             updateScore={props.updateScore}
             metrics={props.metrics}
             session={props.session}
+            triggerMetricCallToggle={props.triggerMetricCallToggle}
         ></Home>
     }
 
     function AddMetricsPage () {
         return <AddMetrics
             session={props.session}
+            triggerMetricCallToggle={props.triggerMetricCallToggle}
         ></AddMetrics>
     }
 
@@ -34,7 +36,7 @@ export default function UserInterface(props) {
         return <DeleteMetrics
             session={props.session}
             metrics={props.metrics}
-            setActivePage={props.setActivePage}
+            triggerMetricCallToggle={props.triggerMetricCallToggle}
         ></DeleteMetrics>
     }
     

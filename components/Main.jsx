@@ -7,32 +7,31 @@ import alert from '../lib/alertPolyfill';
 export default function Main({session}) {
     const [lifetimeScore, setLifetimeScore] = useState(0);
     const [todayScore, setTodayScore] = useState(0);
-    const [activePage, setActivePage] = useState("home");
+    const [refreshContext, setRefreshContext] = useState(false);
     const [loadingMetrics, setLoadingMetrics] = useState(false);
     const [loadingMetricLogs, setLoadingMetricLogs] = useState(false);
     const [metrics, setMetrics] = useState([]);
     const [metricLogs, setMetricLogs] = useState([]);
     const [todayLogs, setTodayLogs] = useState([]);
 
+    function triggerMetricCallToggle () {
+      setRefreshContext(!refreshContext);
+    }
+    
     useEffect(() => {
         getMetrics();
         getMetricLogs();
 
-        /* activePage as dependency allows for refresh to display newly added metrics
-        when navigating back to the home page, with the drawback that it unnecessarily
-        does a GET call when changing to other pages (i.e. add metrics). Adding the
-        metrics arrays was attempted but resulted in infinite loop. 
-        TODO: Simplify / create state variable that is only changed upon
-        navigating back specifically to home page, such as a wrapper around setActivePage
-        unless there is confirmed reasons to need to re-render upon another page change
-        in which case specifying which pages and only altering the state variable
-        when one of those pages is changed (as opposed to any page change).
-        */
-      }, [activePage]);
+        // Dependency for doing get call to db after metrics are added or removed
+      }, [refreshContext]);
 
     function updateScore (increment) {
         setTodayScore(todayScore + increment);
         setLifetimeScore(lifetimeScore + increment);
+        // TODO/Bugfix: Full re-render is clear with flash
+        // after each click, consider improving lifetime/today state tracking
+        // so not necessary to re-call db after every metric log
+        triggerMetricCallToggle();
     }
     
     async function getMetrics() {
@@ -96,8 +95,7 @@ export default function Main({session}) {
             lifetimeScore={lifetimeScore}
             todayScore={todayScore}
             updateScore={updateScore}
-            activePage={activePage}
-            setActivePage={setActivePage}
+            triggerMetricCallToggle={triggerMetricCallToggle}
             metrics={metrics}
             metricLogs={metricLogs}
             todayLogs={todayLogs}
