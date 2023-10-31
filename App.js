@@ -28,9 +28,11 @@ export default function App() {
     <View style={styles.container}>
       <NavigationContainer>
         <Header></Header>
-        {session && session.user ? <Main key={session.user.id} session={session} /> : <Auth />}
         <StatusBar style="auto" />
-        </NavigationContainer>
+        <View style={{flex: 6, alignItems: 'center', justifyContent: 'center'}}>
+          {session && session.user ? <Main key={session.user.id} session={session} /> : <Auth />}
+        </View>
+      </NavigationContainer>
     </View>
   );
 }
@@ -46,6 +48,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: theme.colors.background,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
+    maxHeight: '100vh'
   },
 });

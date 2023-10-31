@@ -5,7 +5,7 @@ import MetricButton from './MetricButton';
 export default function MetricButtonPanel(props) {
     const textHeader = props.colorHex === theme.colors.veryBad ? "Don't": "Do";
     return (
-        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', overflowY: 'auto', maxHeight: '100%'}}>
             <Text style={{fontSize: 18, fontWeight: "bold"}}>{textHeader}</Text>
             <FlatList
                 style={{backgroundColor: props.initialColorHex}}
