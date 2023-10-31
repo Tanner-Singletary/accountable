@@ -26,7 +26,8 @@ export default function UserInterface(props) {
     function ProfilePage () {
         return <Profile
             lifetimeScore={props.lifetimeScore} 
-            todayScore={props.todayScore} 
+            todayScore={props.todayScore}
+            triggerMetricCallToggle={props.triggerMetricCallToggle}
         ></Profile>
     }
     

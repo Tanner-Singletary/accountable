@@ -1,13 +1,17 @@
-import { View, Text } from 'react-native';
+import { View, Text, Button } from 'react-native';
 
 export default function Profile(props) {
-  // TODO: Pass down in props triggerMetricCallToggle();
-  // and assign to a 'refresh' button to update the score here.
 
   return (
-    <View style={{flex: 1, marginTop: 10, alignItems: 'center', justifyContent: 'center'}}>
+    <View style={{flex: 1, padding: 30, alignItems: 'center', justifyContent: 'center'}}>
       <Text>Lifetime Score: {props.lifetimeScore}</Text>
       <Text>Today's Score: {props.todayScore}</Text>
+      <Text>{"\n\n"}Click to refresh scores</Text>
+      <Text>(returns you to home page){"\n\n"}</Text>
+      <Button
+          title="Refresh"
+          onPress={() => props.triggerMetricCallToggle()}
+      ></Button>
     </View>
   );
 }
