@@ -1,33 +1,34 @@
-import React, { useState } from 'react'
-import { Alert, StyleSheet, View } from 'react-native'
-import { supabase } from '../lib/supabase'
-import { Button, Input } from 'react-native-elements'
+import React, { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { supabase } from '../lib/supabase';
+import { Button, Input } from 'react-native-elements';
+import alert from '../lib/alertPolyfill';
 
 export default function Auth() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [loading, setLoading] = useState(false)
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
   async function signInWithEmail() {
-    setLoading(true)
+    setLoading(true);
     const { error } = await supabase.auth.signInWithPassword({
       email: email,
       password: password,
     })
 
-    if (error) Alert.alert(error.message)
-    setLoading(false)
+    if (error) alert(error.message)
+    setLoading(false);
   }
 
   async function signUpWithEmail() {
-    setLoading(true)
+    setLoading(true);
     const { error } = await supabase.auth.signUp({
       email: email,
       password: password,
     })
 
-    if (error) Alert.alert(error.message)
-    setLoading(false)
+    if (error) alert(error.message)
+    setLoading(false);
   }
 
   return (
