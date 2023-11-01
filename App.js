@@ -38,8 +38,8 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    /* TODO: Padding here is because status bar at top of iphone was naturally getting overlapped by content in 
-    various screens (web did not have this issue).
+    /* NOTE: Padding here is because status bar at top of iphone was naturally 
+    getting overlapped by content in various screens (web did not have this issue).
     If padding becomes undesirable, more complicated cross-platform fix available here:
     https://stackoverflow.com/a/39300715/1540350
     */
