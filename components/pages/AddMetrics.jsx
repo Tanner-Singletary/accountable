@@ -5,12 +5,10 @@ import { theme } from '../../lib/constants/theme';
 import alert from '../../lib/alertPolyfill';
 
 export default function AddMetrics({session, triggerMetricCallToggle}) {
-  const defaultPositiveMetric = "New positive metric";
-  const defaultNegativeMetric = "New negative metric";
   const [loading, setLoading] = useState(false);
-  const [positiveMetric, onChangePositiveMetric] = useState(defaultPositiveMetric);
+  const [positiveMetric, onChangePositiveMetric] = useState("Something great");
   const [lastAddedPositiveMetric, setLastAddedPositiveMetric] = useState("");
-  const [negativeMetric, onChangeNegativeMetric] = useState(defaultNegativeMetric);
+  const [negativeMetric, onChangeNegativeMetric] = useState("Something not great");
   const [lastAddedNegativeMetric, setLastAddedNegativeMetric] = useState("");
 
   async function insertMetric(name, category) {
@@ -48,9 +46,9 @@ export default function AddMetrics({session, triggerMetricCallToggle}) {
   }
 
   return (
-    <View>
+    <View style={styles.container}>
       <TextInput
-        style={styles.input}
+        style={styles.positiveInput}
         onChangeText={onChangePositiveMetric}
         value={positiveMetric}
       />
@@ -62,7 +60,7 @@ export default function AddMetrics({session, triggerMetricCallToggle}) {
       <Text>{lastAddedPositiveMetric ? `added ${lastAddedPositiveMetric}!`: ""}</Text>
       <Text>{"\n\n"}</Text>
       <TextInput
-        style={styles.input}
+        style={styles.negativeInput}
         onChangeText={onChangeNegativeMetric}
         value={negativeMetric}
       />
@@ -78,10 +76,24 @@ export default function AddMetrics({session, triggerMetricCallToggle}) {
 }
 
 const styles = StyleSheet.create({
-  input: {
+  container: {
+    flex: 1, 
+    padding: theme.spacing.m, 
+    justifyContent: 'center', 
+    alignItems: 'center'
+  },
+  positiveInput: {
     height: 40,
     margin: 12,
     borderWidth: 1,
     padding: theme.spacing.s,
+    backgroundColor: theme.colors.good
   },
+  negativeInput: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: theme.spacing.s,
+    backgroundColor: theme.colors.bad
+  }
 });
