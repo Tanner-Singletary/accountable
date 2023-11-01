@@ -6,9 +6,9 @@ import alert from '../../lib/alertPolyfill';
 
 export default function AddMetrics({session, triggerMetricCallToggle}) {
   const [loading, setLoading] = useState(false);
-  const [positiveMetric, onChangePositiveMetric] = useState("Something great");
+  const [positiveMetric, onChangePositiveMetric] = useState("");
   const [lastAddedPositiveMetric, setLastAddedPositiveMetric] = useState("");
-  const [negativeMetric, onChangeNegativeMetric] = useState("Something not great");
+  const [negativeMetric, onChangeNegativeMetric] = useState("");
   const [lastAddedNegativeMetric, setLastAddedNegativeMetric] = useState("");
 
   async function insertMetric(name, category) {
@@ -53,7 +53,7 @@ export default function AddMetrics({session, triggerMetricCallToggle}) {
         value={positiveMetric}
       />
       <Button
-        title="Add positive metric"
+        title="Add new thing to do"
         onPress={() => updatePositiveMetric(positiveMetric)}
         disabled={loading}
       ></Button>
@@ -65,7 +65,7 @@ export default function AddMetrics({session, triggerMetricCallToggle}) {
         value={negativeMetric}
       />
       <Button
-        title="Add negative metric"
+        title="Add new thing to avoid"
         onPress={() => updateNegativeMetric(negativeMetric)}
         disabled={loading}
       ></Button>
