@@ -24,9 +24,8 @@ export default function DeleteMetrics(props) {
       .delete()
       .eq('user', props.session.user.id)
       .in('name', metricNamesToDelete)
-    alert("Deletion submitted, return to home page to see remaining metrics.");
-    // BUGFIX: This seems to work in ios/mobile but not web
     props.triggerMetricCallToggle();
+    alert("Deletion submitted, return to home page to see remaining metrics.");
   }
 
   return (
